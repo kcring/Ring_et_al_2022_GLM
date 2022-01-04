@@ -1,0 +1,83 @@
+Tick ID,Larval Blood Meal ,Trial,Inoculum_load_10^,HostID,Infection Status ,Infection Load,Rickettsia_qPCR
+1,Pema,1_IU,5,Mouse1,Neg,0,7197
+2,Pema,1_IU,5,Mouse2,Pos,9880000,1493
+3,Pema,1_IU,5,Mouse3,Neg,0,3821
+4,Pema,1_IU,5,Mouse4,Pos,46400000,988
+5,Pema,1_IU,5,Mouse5,Neg,0,2687
+6,Pema,1_IU,5,Mouse6,Neg,0,5100
+7,Pema,1_IU,5,Mouse7,Neg,0,5282
+8,Pema,1_IU,5,Mouse8,Neg,0,1620
+9,Pema,1_IU,5,Mouse9,Neg,0,7538
+10,Pema,1_IU,5,Mouse10,Neg,0,1724
+11,Pema,1_IU,5,Mouse11,Neg,0,4644
+12,Pema,1_IU,5,Mouse12,Neg,0,10698
+13,Pema,1_IU,5,Mouse13,Neg,0,4146
+14,Scoc,1_IU,5,Mouse14,Pos,360500000,9366
+15,Scoc,1_IU,5,Mouse15,Pos,385000000,7568
+16,Scoc,1_IU,5,Mouse16,Pos,381500000,12178
+17,Scoc,1_IU,5,Mouse17,Pos,230000000,20474
+PEMA.11,Pema,2_SF,6,Mouse B,Neg,0,
+PEMA.12,Pema,2_SF,6,Mouse B,Neg,0,
+PEMA.16,Pema,2_SF,6,Mouse B,Pos,46.35,
+PEMA.17,Pema,2_SF,6,Mouse B,Pos,109.98,
+PEMA.19,Pema,2_SF,6,Mouse B,Pos,2.17,
+PEMA.20,Pema,2_SF,6,Mouse B,Neg,0,
+PEMA.21,Pema,2_SF,6,Mouse B,Pos,1,
+PEMA.22,Pema,2_SF,6,Mouse B,Neg,0,
+PEMA.23,Pema,2_SF,6,Mouse B,Pos,26.7,
+PEMA.24,Pema,2_SF,6,Mouse B,Neg,0,
+PEMA.30,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.31,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.32,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.34,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.36,Pema,2_SF,6,Mouse C,Pos,66.7,
+PEMA.37,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.38,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.39,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.40,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.41,Pema,2_SF,6,Mouse C,Neg,0,
+PEMA.43,Pema,2_SF,6,Mouse C,Neg,0,
+SCOC.17,Scoc,2_SF,6,Mouse B,Pos,1.33,
+SCOC.18,Scoc,2_SF,6,Mouse B,Pos,6.9,
+SCOC.19,Scoc,2_SF,6,Mouse B,Pos,1213.33,
+SCOC.20,Scoc,2_SF,6,Mouse B,Pos,89.95,
+SCOC.30,Scoc,2_SF,6,Mouse B,Pos,16.2,
+SCOC.32,Scoc,2_SF,6,Mouse B,Pos,4.7,
+SCOC.33,Scoc,2_SF,6,Mouse B,Pos,7.97,
+SCOC.34,Scoc,2_SF,6,Mouse B,Pos,7.52,
+SCOC.35,Scoc,2_SF,6,Mouse B,Pos,9.3,
+SCOC.36,Scoc,2_SF,6,Mouse B,Pos,306,
+SCOC.37,Scoc,2_SF,6,Mouse B,Pos,399,
+SCOC.38,Scoc,2_SF,6,Mouse B,Pos,6.14,
+SCOC.39,Scoc,2_SF,6,Mouse B,Pos,468.5,
+SCOC.40,Scoc,2_SF,6,Mouse B,Pos,1.14,
+SCOC.41,Scoc,2_SF,6,Mouse C,Pos,13.22,
+SCOC.42,Scoc,2_SF,6,Mouse C,Pos,21.43,
+SCOC.43,Scoc,2_SF,6,Mouse C,Pos,3.44,
+SCOC.44,Scoc,2_SF,6,Mouse C,Neg,0,
+SCOC.45,Scoc,2_SF,6,Mouse C,Pos,8.4,
+SCOC.50,Scoc,2_SF,6,Mouse C,Pos,2.24,
+18,Pema,1_SF,7,Mouse X,Pos,,
+19,Pema,1_SF,7,Mouse X,Neg,,
+20,Pema,1_SF,7,Mouse X,Neg,,
+21,Pema,1_SF,7,Mouse X,Neg,,
+22,Pema,1_SF,7,Mouse X,Neg,,
+23,Pema,1_SF,7,Mouse X,Neg,,
+24,Pema,1_SF,7,Mouse X,Pos,,
+25,Pema,1_SF,7,Mouse X,Pos,,
+26,Pema,1_SF,7,Mouse Y,Pos,,
+27,Pema,1_SF,7,Mouse Y,Pos,,
+28,Pema,1_SF,7,Mouse Y,Neg,,
+29,Pema,1_SF,7,Mouse Y,Pos,,
+30,Scoc,1_SF,7,Mouse Z,Neg,,
+31,Scoc,1_SF,7,Mouse Z,Neg,,
+32,Scoc,1_SF,7,Mouse Z,Neg,,
+33,Scoc,1_SF,7,Mouse Z,Neg,,
+34,Scoc,1_SF,7,Mouse Z,Neg,,
+35,Scoc,1_SF,7,Mouse Z,Neg,,
+36,Scoc,1_SF,7,Mouse Z,Neg,,
+37,Scoc,1_SF,7,Mouse Z,Neg,,
+38,Scoc,1_SF,7,Mouse Z,Neg,,
+39,Scoc,1_SF,7,Mouse Z,Neg,,
+40,Scoc,1_SF,7,Mouse Z,Neg,,
+41,Scoc,1_SF,7,Mouse Z,Neg,,

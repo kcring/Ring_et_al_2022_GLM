@@ -1,0 +1,194 @@
+---
+title: "Host blood meal GLM/Chi-squared"
+author: "Kacie Ring"
+date: "4/5/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Step 1: Load in data. Set larval blood meal source and infection status as factors 
+```{r setup, include = FALSE}
+
+#setwd("~/Desktop/SFSU/Host_Legacy_GLM")
+tick<-read.csv("Host_Blood_Meal_Data_Lisa+Kacie_AllData.csv", header=T)
+
+#install.packages("lme4")
+#install.packages("glmm")
+#install.packages("magrittr")
+library(magrittr)
+library(tidyverse)
+library(lme4)
+library(glmm)
+library(ggplot2)
+
+
+```
+
+
+```{r}
+
+#Turn categorical variables into factors 
+
+tick$Infection.Status<-as.factor(tick$Infection.Status)
+tick$Larval.Blood.Meal<-as.factor(tick$Larval.Blood.Meal)
+tick$Trial <-as.factor(tick$Trial)
+tick$HostID <-as.factor(tick$HostID)
+str(tick)
+```
+
+
+
+Step 2: Chi-squared test + bar & mosiac plots 
+```{r}
+ctable<- table(tick$Larval.Blood.Meal, tick$Infection.Status)
+ctable
+test <- chisq.test(table(tick$Larval.Blood.Meal, tick$Infection.Status))
+test
+
+
+mosaicplot(ctable, main = "Infection status of Bb engorged nymphs",
+           xlab= "Larval blood meal",
+           ylab = "Infection status",
+           las = 1,
+           color = c("azure4", "darkcyan"))
+
+ggplot (tick, 
+        aes(x = Larval.Blood.Meal, fill = Infection.Status)) + 
+        geom_bar(position = "dodge", color = "black") + 
+        labs(title = "Infection status of Bb engorged nymphs", x ="Larval host   blooodmeal", y = "Tick count", fill = "Infection status") + 
+        theme_bw() + scale_fill_manual(values = c("azure4", "darkcyan")) 
+       
+```
+
+
+Step 3: Glmm
+```{r}
+#Trial and Nymphal (infected) C3H mouse host ID as random effecs 
+#Is larval blood meal a significant predictor of Infection status? 
+
+
+tick_model1<-glmer(Infection.Status~Larval.Blood.Meal+(1|Trial), data=tick, family=binomial(link="logit"))
+
+summary(tick_model1)
+
+unique(tick$HostID)
+
+tick_model2<-glmer(Infection.Status~Larval.Blood.Meal+(1|HostID), data=tick, family=binomial(link="logit"))
+
+summary(tick_model2)
+
+#tick_model3<-glmer(Infection.Status~Larval.Blood.Meal+(1+Larval.Blood.Meal|Trial)+(1+Larval.Blood.Meal|HostID), data=tick, family=binomial(link="logit"))
+
+#summary(tick_model3)
+
+#first attempt
+tick_model4<-glmer(Infection.Status~Larval.Blood.Meal+(1|Trial)+(1|HostID), data=tick, family=binomial(link="logit"))
+
+summary(tick_model4)
+isSingular(tick_model4)
+
+tick_model5<-glmer(Infection.Status~Larval.Blood.Meal+(1|HostID)+(1|Trial), data=tick, family=binomial(link="logit"))
+summary(tick_model5)
+
+
+#Model above is singular. Are random effects crossed? Let's remodel 
+
+tick_model6<-glmer(Infection.Status~Larval.Blood.Meal+(1|Trial:HostID), data=tick, family=binomial(link="logit"))
+
+summary(tick_model6)
+
+anova(tick_model4)
+rand(tick_model4)
+
+#Need to investigate model singularity and "Model failed to converge" error 
+
+isSingular(tick_model5)
+
+
+#Are trial and Mouse ID independent??? Narrr
+
+```
+```{r}
+#Let's try and troubleshoot this convergence problem 
+
+nrow(tick)
+
+length(getME(tick_model4,"theta"))
+
+length(fixef(tick_model4))
+
+#Checking for singularity - with estimates 
+
+tt <- getME(tick_model4,"theta")
+ll <- getME(tick_model4,"lower")
+min(tt[ll==0])
+
+#Okay singularity doesn't seeem to be the issue here 
+#Could the random effects be non-independent... thats seems to be the issue here and explains why psudeoreplication is a serious issue in these analyses.... May need to delve into more troubleshooting of how to address psuedoreplication
+
+
+```
+
+
+```{r}
+
+tick$Larval.Blood.Meal<-as.factor(tick$Larval.Blood.Meal)
+
+library(magrittr)
+library(tidyverse)
+library(ggplot2)
+theme_set(theme_bw()); theme_update(plot.title = element_text(hjust = 0.5))
+
+setwd("~/Desktop/SFSU/Host_Legacy_GLM")
+tick<-read.csv("Host_Blood_Meal_Data_Lisa+Kacie_AllData.csv", header=T)
+
+liz<-subset(tick, Larval.Blood.Meal=="Scoc")
+mouse<-subset(tick, Larval.Blood.Meal=="Pema")
+
+Pema<-mouse$Infection.Status #mouse infection data
+Scoc<-liz$Infection.Status  #liz infection data
+  
+
+# prepare a summary table with one row per experiment
+tickplot<- tibble(
+  host=factor(c( rep("Pema", length(Pema)), rep("Scoc", length(Scoc)))), 
+  outcome=c(Pema, Scoc)) %>%
+  group_by(host) %>% 
+  summarize(n=n(), p=mean(as.numeric(as.character(outcome)))) %>%
+  mutate(se=sqrt(abs(p*(1-p)/n)))
+
+
+
+# visualizing with boxplot and 95% confidence intervals
+ggplot(data=tickplot, aes(x=host, y=p, fill=host)) + 
+  coord_cartesian(ylim=c(0,1)) + 
+  geom_boxplot(
+    stat='identity',
+    aes(
+      ymin=p-1.96*se, 
+      lower = p - se,
+      middle = p,
+      upper = p + se,
+      ymax = p + 1.96*se)
+  ) + ylab("Proportion Infected")+
+  ggtitle("Comparison of larval blood meal")
+
+
+
+```
+
+
+
+```{r}
+
+load_data <- subset(tick, Trial != "1_SF")
+
+load_data <- load_data[ which(load_data$Infection.Load > 0),]
+
+apply(load_data[, 7], 2, function(x) (x - mean(x))/sd(x))
+
+
+
+```
+
