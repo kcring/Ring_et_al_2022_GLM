@@ -35,11 +35,11 @@ library(AICcmodavg)
 ```{r}
 
 #Turn categorical variables into factors 
-
 tick$Infection.Status<-as.factor(tick$Infection.Status)
 tick$Larval.Blood.Meal<-as.factor(tick$Larval.Blood.Meal)
 tick$Trial <-as.factor(tick$Trial)
 tick$HostID <-as.factor(tick$HostID)
+
 str(tick)
 ```
 
@@ -52,13 +52,19 @@ ctable
 test <- chisq.test(table(tick$Larval.Blood.Meal, tick$Infection.Status))
 test
 
-
+#create mosaic plot 
 mosaicplot(ctable, main = "Infection status of Bb engorged nymphs",
            xlab= "Larval blood meal",
            ylab = "Infection status",
            las = 1,
            color = c("azure4", "darkcyan"))
+```
 
+
+```{r}
+#bar plot to view raw experimental results
+
+#Supplemental Figure 1 
 ggplot (tick, 
         aes(x = Larval.Blood.Meal, fill = Infection.Status)) + 
         geom_bar(position = "dodge", color = "black") + 
@@ -131,7 +137,7 @@ ll <- getME(tick_model4,"lower")
 min(tt[ll==0])
 
 #Okay singularity doesn't seeem to be the issue here 
-#Could the random effects be non-independent... thats seems to be the issue here and explains why psudeoreplication is a serious issue in these analyses.... May need to delve into more troubleshooting of how to address psuedoreplication
+
 
 
 ```
@@ -213,6 +219,13 @@ ggsave("fig_1.pdf", plot = fig_1, height= 15, width = 14, device = "pdf", units 
 ```
 
 
+```{r}
+#lets look at the fig 
+
+fig_1
+
+
+```
 
 
 
