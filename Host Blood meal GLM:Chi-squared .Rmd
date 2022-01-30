@@ -11,7 +11,7 @@ Step 1: Load in data. Set larval blood meal source and infection status as facto
 ```{r setup, include = FALSE}
 
 #setwd("~/Desktop/SFSU/Host_Legacy_GLM")
-tick<-read.csv("Host_Blood_Meal_Data_Lisa+Kacie_AllData.csv", header=T)
+tick<-read.csv("Host_Blood_Meal_Data.csv", header=T)
 
 #install.packages("lme4")
 #install.packages("glmm")
